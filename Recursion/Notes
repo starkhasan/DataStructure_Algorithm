@@ -1,0 +1,33 @@
+What is Recursion
+
+The Process in which a function calls itself directly or indirectly is called
+recursion and the corresponding function is called as recursive function.
+Using recursive algorithm, certain problems can be solved quite easily.
+
+what is base condition in recursion?
+There must be atleast one base criteria or condition, such that when this conditionis is
+met the function stop calling itself recursively. Progressive approach The recursive
+calls should progress in such a way that each time a recursive 
+call is made it comes closer to the base criteria.
+
+
+why Stack Overflow error occurs in Recursion?
+If the base case is not reached or not define, then the tack overflow problem 
+may arise.
+
+
+What is the difference between direct and indirect recursion?
+
+A function fun is called direct resursive if it calls the same function fun.
+A function fun is calledindirect resursive if it calls another function say fun_new
+and fun_new calls fun directly or indirectly.
+
+
+
+How memory is allocated to different function calls in recursion?
+When any function is called from main() the memory is allocated to it on the
+stack. A recursive function calls it self, the memory for a called function 
+is allocated on top of memory allocated to calling function and the different copy
+of local variables is created for rach function call. When the base case is reached
+the function returns its value to the function by whom it is called meomory if deallocated 
+and the proves continues.
