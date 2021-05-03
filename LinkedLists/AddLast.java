@@ -7,16 +7,18 @@ class Node{
         next = null;
     }
 }
-public class AddFront {
+public class AddLast {
     public static Node insert(Node head,int data){
-        Node newNode = new Node(data);
         if(head == null){
-            head = newNode;
+            head = new Node(data);
         }else{
-            newNode.next = head;
-            head = newNode;
+            Node cur = head;
+            while(cur.next!=null){
+                cur = cur.next;
+            }
+            cur.next = new Node(data);
         }
-        return newNode;
+        return head;
     }
 
     public static void printLinkedList(Node head){
@@ -26,16 +28,18 @@ public class AddFront {
             temp = temp.next;
         }
     }
+
     public static void main(String[] args) throws IOException{
         Node head = null;
         BufferedReader buffer = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Enter Size of Linked List");
+        System.out.println("Enter Size of LinkedList");
         int list_size = Integer.parseInt(buffer.readLine());
-        while(list_size > 0){
+        while(list_size>0){
             head = insert(head,Integer.parseInt(buffer.readLine()));
             list_size-=1;
         }
-        System.out.println("Element in Linked List After Adding Front");
         printLinkedList(head);
     }
 }
+
+
