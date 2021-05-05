@@ -1,27 +1,14 @@
 import java.io.*;
+
 class Node{
-    Node next;
     int data;
+    Node next;
     Node(int data){
         this.data = data;
         next = null;
     }
 }
-public class DemoList{
-
-    public static Node insert(Node head,int data){
-        if(head == null){
-            head = new Node(data);
-        }else{
-            Node current = head;
-            while(current.next!=null){
-                current = current.next;
-            }
-            current.next = new Node(data);
-        }
-        return head;
-    }
-
+public class GetNthNode {
     public static void printList(Node head){
         System.out.println();
         Node temp = head;
@@ -31,6 +18,19 @@ public class DemoList{
         }
     }
 
+    public static Node insert(Node head,int data){
+        if(head == null){
+            head = new Node(data);
+        }else{
+            Node current = head;
+            while(current.next!= null){
+                current = current.next;
+            }
+            current = new Node(data);
+        }
+        return head;
+    }
+
     public static int getSize(Node head){
         if(head == null)
             return 0;
@@ -38,8 +38,17 @@ public class DemoList{
             return 1+getSize(head.next);
     }
 
-
-
+    public static int getIndexValue(Node head,int index){
+        int tempIndex = 0;
+        Node temp = head;
+        while(temp!=null){
+            if(tempIndex == index)
+                return temp.data;
+            tempIndex+=1;
+            temp = temp.next;
+        }
+        return -1;
+    }
     public static void main(String[] args) throws IOException{
         BufferedReader buffer = new BufferedReader(new InputStreamReader(System.in));
         Node head = null;
@@ -50,6 +59,11 @@ public class DemoList{
             list_size-=1;
         }
         printList(head);
-        
+        int search_element = Integer.parseInt(buffer.readLine());
+        search_element = getIndexValue(head, search_element);
+        if(search_element != -1)
+            System.out.println("Element Found  = "+search_element);
+        else
+            System.out.println("Element Not Found!");
     }
 }
