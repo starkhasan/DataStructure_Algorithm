@@ -1,17 +1,10 @@
+//Program for Moving Last item to first in Linked List
 import java.util.*;
-class Node{
-    Node next;
-    int data;
-    Node(int data){
-        this.data = data;
-        next = null;
-    }
-}
-public class CountItem {
+public class MoveLastFirst{
     public static Node insert(Node head,int data){
-        if(head == null)
+        if(head == null){
             head = new Node(data);
-        else{
+        }else{
             Node current = head;
             while(current.next!=null){
                 current = current.next;
@@ -22,33 +15,30 @@ public class CountItem {
     }
 
     public static void printList(Node head){
-        System.out.println();
         Node temp = head;
+        System.out.println();
         while(temp!=null){
             System.out.print(temp.data+" ");
             temp = temp.next;
         }
     }
 
-    public static int getItemCount(Node head, int key){
-        int itemCount = 0;
+    public static Node moveLastFirst(Node head){
         Node temp = head;
+        int lastData = 0;
         while(temp!=null){
-            if(temp.data == key)
-                itemCount++;
+            if(temp.next.next == null){
+                lastData = temp.next.data;
+                temp.next = null;
+            }
             temp = temp.next;
         }
-        return itemCount;
+        Node newNode = new Node(lastData);
+        newNode.next = head;
+        head = newNode;
+        return head;
     }
-
-    public static int getItemCountRecursive(Node head,int key,int count){
-        if(head == null)
-            return count;
-        if(head.data == key)
-            count++;
-        return getItemCountRecursive(head.next, key,count);
-    }
-
+    
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter Size : ");
@@ -59,12 +49,7 @@ public class CountItem {
             list_size-=1;
         }
         printList(head);
-        int key = sc.nextInt();
-        int item = getItemCountRecursive(head,key,0);
-        if(item > 0)
-            System.out.println("Item Founds= "+item+" times");
-        else
-            System.out.println("Item not found!");
-        sc.close();
+        head = moveLastFirst(head);
+        printList(head);
     }
 }

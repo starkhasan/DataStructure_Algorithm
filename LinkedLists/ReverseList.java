@@ -32,6 +32,16 @@ public class ReverseList {
         }
         return prev;
     }
+    public static Node recursion(Node temp,Node prev){
+        if(temp == null){
+            return prev;
+        }else{
+            Node current = temp.next;
+            temp.next = prev;
+            prev = temp;
+            return recursion(current,prev);
+        }
+    }
     public static void main(String[] args) throws IOException{
         BufferedReader buffer = new BufferedReader(new InputStreamReader(System.in));
         Node head = null;
@@ -42,7 +52,7 @@ public class ReverseList {
             list_size-=1;
         }
         printList(head);
-        head = reverse(head);
+        head = recursion(head,null);
         System.out.println("\nReverse Linked List");
         printList(head);
     }
