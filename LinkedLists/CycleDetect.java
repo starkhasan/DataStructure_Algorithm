@@ -46,10 +46,11 @@ public class CycleDetect {
 
 
     public static int countNode(Node node){
-        if(node.next == node)
+        Node temp = node.next;
+        if(node == temp)
             return 1;
         else
-            return 1+countNode(node.next);
+            return 1+countNode(temp.next);
         
     }
 
