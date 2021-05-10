@@ -54,7 +54,6 @@ public class Implementation {
         while(queue_size > 0){
             if(head == null){
                 head = add(head,Integer.parseInt(buffer.readLine()));
-
             }else{
                 if(tail == null){
                     tail = add(tail,Integer.parseInt(buffer.readLine()));
