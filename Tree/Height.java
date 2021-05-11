@@ -4,22 +4,21 @@ class Node{
     Node right;
     int data;
     Node(int data){
-        this.data = data;
-        left = null;
-        right = null;
+        this.data = data; 
+        left = right = null;
     }
 }
-public class Implementation {
+public class Height {
     static Node insert(Node root,int data){
-        if(root == null){
+        if(root == null)
             return new Node(data);
-        }else{
+        else{
             Node cur;
-            if(data <=  root.data){
+            if(data <= root.data){
                 cur = insert(root.left,data);
                 root.left = cur;
             }else{
-                cur =insert(root.right,data);
+                cur = insert(root.right,data);
                 root.right = cur;
             }
             return root;
@@ -34,32 +33,31 @@ public class Implementation {
         }
     }
 
-    static void preorder(Node focusNode){
-        if(focusNode!=null){
-            System.out.print(focusNode.data+" ");
-            preorder(focusNode.left);
-            preorder(focusNode.right);
+    static int getHeight(Node root){
+        if(root == null)
+            return 0;
+        else{
+            int ldepth = getHeight(root.left);
+            int rdepth = getHeight(root.right);
+            if(ldepth > rdepth)
+                return ldepth+1;
+            else
+                return rdepth+1;
         }
     }
 
-    static void postorder(Node focusNode){
-        if(focusNode != null){
-            postorder(focusNode.left);
-            postorder(focusNode.right);
-            System.out.print(focusNode.data+" ");
-        }
-    }
-    
+
     public static void main(String[] args) throws IOException{
         BufferedReader buffer = new BufferedReader(new InputStreamReader(System.in));
-        Node root = null;
-        System.out.println("Enter Tree Size : ");
         int tree_size = Integer.parseInt(buffer.readLine());
+        Node root = null;
         while(tree_size > 0){
-            root = insert(root, Integer.parseInt(buffer.readLine()));
+            root = insert(root,Integer.parseInt(buffer.readLine()));
             tree_size-=1;
         }
+        System.out.println("\nInorder Traversal : ");
         inorder(root);
-        buffer.close();
-    }  
+        int height = getHeight(root);
+        System.out.println("\nHeight of Tree = "+(height - 1));
+    }   
 }
