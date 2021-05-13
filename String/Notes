@@ -1,0 +1,13 @@
+What is the difference between the isBlank() and isEmpty() method in java?
+
+isEmpty()
+The jav string isEmpty() method checks if this string is empty. It returns true if the length of the string is 0 otherwise false
+
+System.out.print("".isEmpty())  // true
+System.out.print(" ".isEmpty())    //false
+
+isBlank()
+The new instance method java.lang.String.isBlank() returns true if the string is empty or contains
+only white space, where whitespace is define as any codepoint that return true when passes to Character isWhiteSpace(int)
+
+("\n\r  ").isBlank();  //returns true
