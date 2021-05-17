@@ -46,6 +46,13 @@ public class Height {
         }
     }
 
+    static int treeHeight(Node root){
+        if(root == null)
+            return -1;
+        else
+            return Math.max(treeHeight(root.left)+1, treeHeight(root.right)+1);
+    }
+
 
     public static void main(String[] args) throws IOException{
         BufferedReader buffer = new BufferedReader(new InputStreamReader(System.in));
