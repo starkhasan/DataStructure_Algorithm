@@ -1,7 +1,4 @@
-import java.io.*;
-import java.nio.file.Files;
-class DemoArray{
-    
+public class DuplicateSet2 {
     static int removeDuplicate(int[] ar){
         int j = 0;
         boolean isFirst = true;
