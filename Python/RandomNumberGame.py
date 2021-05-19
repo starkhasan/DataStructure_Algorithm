@@ -13,7 +13,7 @@ def Game():
         try:
             i=i+1
             print("You have ",num-i+1," Chance ")
-            i_num = int(input("Guess a Number Between 0 -10 = "))
+            i_num = int(input("Guess a Number Between 0 - 10 = "))
             if i_num < number:
                 raise ValueTooSmallError
             elif i_num > number:

@@ -8,28 +8,7 @@ class Node{
         next = null;
     }
 }
-public class Expression {
-
-    static String postFix = "";
-    
-    static Node insert(Node head,String data){
-        Node newNode = new Node(data);
-        if(head == null)
-            head = newNode;
-        else{
-            newNode.next = head;
-            head = newNode;
-        }
-        return head;
-    }
-
-    static void printItem(Node head){
-        Node temp = head;
-        while(temp!=null){
-            System.out.print(temp.data+" ");
-            temp = temp.next;
-        }
-    }
+public class InfixPostfix {
 
     static int prec(char symbol){
         switch (symbol) {
@@ -44,8 +23,6 @@ public class Expression {
         }
         return -1;
     }
-
-    
 
     static String convertExpression(String infix){
         String result = "";
@@ -88,7 +65,6 @@ public class Expression {
 
     public static void main(String[] args) throws IOException{
         BufferedReader buffer = new BufferedReader(new FileReader("Input.txt"));
-        Node head = null;
         String input = "";
         while(buffer.readLine()!=null){
             input = buffer.readLine();
