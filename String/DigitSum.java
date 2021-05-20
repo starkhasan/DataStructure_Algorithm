@@ -3,13 +3,7 @@ import java.io.*;
 public class DigitSum {
     static int digitSummation(String input){
         var result = 0;
-        var charArray = input.toCharArray();
-        for (char c : charArray) {
-            if(Character.isDigit(c)){
-                System.out.println((int)c);
-                result+=(int)c;
-            }
-        }
+        
         return result;
     }
     public static void main(String[] args) {
