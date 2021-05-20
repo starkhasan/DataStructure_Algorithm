@@ -89,6 +89,7 @@ public class RotateList {
         printList(head);
         System.out.println("\nRotation Times : ");
         int key = Integer.parseInt(buffer.readLine());
+        System.out.print("Anti-Clockwise Rotation of Linked List : ");
         head = rotation(head,key);
         printList(head);
         buffer.close();
