@@ -1,9 +1,8 @@
-import java.util.*;
 import java.io.*;
-public class DigitSum {
-
-    static int digitsSum(String input){
-        var result = 0;
+import java.util.*;
+public class MaxDigitInString {
+    static int maxDigitInString(String input){
+        var result = -1;
         var startIndex = 0;
         var endIndex = 0;
         boolean isCalculate = false;
@@ -36,43 +35,29 @@ public class DigitSum {
             }
 
             if(isCalculate){
-                result+=Integer.parseInt(input.substring(startIndex, endIndex));
+                var temp = Integer.parseInt(input.substring(startIndex, endIndex));
+                if(result < temp)
+                    result = temp; 
             } 
         }
         return result;
-    }
-
-    static int digitSumSmall(String input){
-        var temp = "0";
-        var sum = 0;
-        for (var i = 0; i < input.length(); i++) {
-            var chr = input.charAt(i);
-            if(Character.isDigit(chr)){
-                temp+=chr;
-            }else{
-                sum+=Integer.parseInt(temp);
-                temp = "0";
-            }
-        }
-        sum+=Integer.parseInt(temp);
-        return sum;
     }
     public static void main(String[] args) {
         try {
             File file = new File("Input.txt");
             Scanner sc = new Scanner(file);
-            var input = "";
+            String input = "";
             while(sc.hasNext()){
                 input = sc.nextLine();
             }
-            var temp = digitSumSmall(input);
-            if(temp != 0)
-                System.out.println("Total Sum of Digits Present in String : "+temp);
+            var result = maxDigitInString(input);
+            if(result >= 0)
+                System.out.println("Maximum Digit in String : "+result);
             else
-                System.out.println("No! Digits are present in the String");
+                System.out.println("No Digit Present in String");
             sc.close();
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         }
-    }
+    }    
 }
