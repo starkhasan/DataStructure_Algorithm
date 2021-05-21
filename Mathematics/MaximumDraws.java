@@ -3,7 +3,7 @@ public class MaximumDraws {
     static int maximumDraws(int number){
         return number+1;
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException{
         BufferedReader buffer = new BufferedReader(new InputStreamReader(System.in));
         int number = Integer.parseInt(buffer.readLine());
         System.out.println(maximumDraws(number));
