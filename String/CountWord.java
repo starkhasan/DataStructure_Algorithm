@@ -3,11 +3,12 @@ import java.io.*;
 public class CountWord {
     static int countWords(String input){
         var count = 0;
-        var strAr = input.split("\\s+");
+        var strAr = input.split("[ \n\t]+");
         for (String string : strAr) {
-            System.out.println(string);
             count++;
+            System.out.println(string);
         }
+        System.out.println(strAr.length);
         return count;
     }
     public static void main(String[] args) {
