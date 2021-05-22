@@ -10,7 +10,7 @@ class Node{
 }
 public class SecondLargest {
 
-    static int count = 2;
+    static int count = 1;
 
     static Node insert(Node root,int data){
         if(root == null)
@@ -35,7 +35,7 @@ public class SecondLargest {
                 }
                 Node temp = stack.pop();
                 
-                if(count == 1){
+                if(count == 0){
                     System.out.print(temp.data+" ");
                     break;
                 }else
