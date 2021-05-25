@@ -66,7 +66,7 @@ public class CycleDetect {
         return 0;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException{
         BufferedReader buffer = new BufferedReader(new InputStreamReader(System.in));
         int list_size = Integer.parseInt(buffer.readLine());
         Node head = null;
