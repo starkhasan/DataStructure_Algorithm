@@ -1,11 +1,13 @@
+import java.io.*;
+import java.util.*;
 public class DuplicateSet2 {
     static int removeDuplicate(int[] ar){
         int j = 0;
         boolean isFirst = true;
         for (int i = 0; i < ar.length-1; i++) {
             if(ar[i] != ar[i+1]){
-                ar[j++] = ar[i];
-            }else{
+                ar[j++] = ar[i]; 
+            }else {
                 if (isFirst) {
                     isFirst = false;
                     System.out.println("\nDuplicate Items : ");
@@ -26,15 +28,16 @@ public class DuplicateSet2 {
         }
     }
 
-    public static void main(String[] args) throws IOException{
-        BufferedReader buffer = new BufferedReader(new FileReader("InputArray.txt"));
-        String input = "";
-        while(buffer.readLine() != null){
-            input = buffer.readLine();
+    public static void main(String[] args) throws FileNotFoundException{
+        var file = new File("InputArray.txt");
+        var scanner = new Scanner(file);
+        var input = "";
+        while(scanner.hasNext()){
+            input = scanner.nextLine();
         }
-        String[] strAr = input.split(" ");
-        int count = 0;
-        int[] ar = new int[strAr.length];
+        var strAr = input.split(" ");
+        var count = 0;
+        var ar = new int[strAr.length];
         for (String string : strAr) {
             ar[count] = Integer.parseInt(string);
             count++;
@@ -45,6 +48,6 @@ public class DuplicateSet2 {
         for (int i = 0; i < pos; i++) {
             System.out.print(ar[i]+" ");
         }
-        buffer.close();
+        scanner.close();
     }
 }

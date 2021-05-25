@@ -59,6 +59,7 @@ public class RotateList {
         int size = listSize(head);
         k = k%size;
         if(k != 0){
+            System.out.println(k);
             makeCycle(head);
             Node first = firstNode(head);
             Node temp = first;

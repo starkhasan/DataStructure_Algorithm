@@ -33,6 +33,8 @@ public class RemoveDuplicateSorted{
 
     static Node removeDuplicate(Node head){
         var temp = head;
+        if(head == null)
+            return head;
         while(temp.next!=null){
             if(temp.data == temp.next.data)
                 temp.next = temp.next.next;
