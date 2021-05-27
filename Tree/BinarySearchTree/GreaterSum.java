@@ -29,12 +29,8 @@ public class GreaterSum {
         if(root == null)
             return 0;
         else{
-            if(root.left != null)
-                leftSum = calculateSum(root.left);
-            
-            if(root.right!=null)
-                rightSum =  calculateSum(root.right);
-
+            leftSum = calculateSum(root.left);    
+            rightSum =  calculateSum(root.right);
             sum = root.data + leftSum + rightSum;
             return sum;
         }
@@ -59,9 +55,9 @@ public class GreaterSum {
 
 
     public static void main(String[] args) throws IOException{
-        BufferedReader buffer = new BufferedReader(new InputStreamReader(System.in));
+        var buffer = new BufferedReader(new InputStreamReader(System.in));
         Node root = null;
-        int tree_size = Integer.parseInt(buffer.readLine());
+        var tree_size = Integer.parseInt(buffer.readLine());
         while(tree_size > 0){
             root = insert(root,Integer.parseInt(buffer.readLine()));
             tree_size-=1;
