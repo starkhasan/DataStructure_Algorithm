@@ -20,17 +20,28 @@ public class BreadthFirstSearch {
         }
     }
 
-    static void search(ArrayList<ArrayList<Integer>> adj,int startNode){
+
+    static void BFS(ArrayList<ArrayList<Integer>> adj,int startNode){
         var visited = new boolean[adj.size()];
-        var queue = new ArrayList<Integer>();
-        visited[startNode] = true;
+        var queue = new LinkedList<Integer>();
+
+        visited[startNode-1] = true;
         queue.add(startNode);
-        while(!queue.isEmpty()){
-            startNode = queue.get(queue.size()-1);
-            queue.remove(queue.size()-1);
-            var iterator = adj
+        while(queue.size() > 0){
+            startNode = queue.poll();
+            System.out.print(startNode+" ");
+            var itr = adj.get(startNode-1).iterator();
+            while(itr.hasNext()){
+                var temp = itr.next();
+                if(!visited[temp-1]){
+                    visited[temp-1] = true;
+                    queue.add(temp);
+                }
+            }
         }
     }
+
+
     public static void main(String[] args) {
         var size = 5;
         var adjList = new ArrayList<ArrayList<Integer>>();
@@ -45,6 +56,7 @@ public class BreadthFirstSearch {
         addEdge(adjList,4,5);
 
         printGraph(adjList);
+        BFS(adjList,1);
 
     }
 }
