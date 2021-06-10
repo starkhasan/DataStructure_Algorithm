@@ -45,7 +45,6 @@ public class DepthFirstSearch {
         addEdge(adjList, 2, 5);
         addEdge(adjList, 3, 4);
         addEdge(adjList, 4, 5);
-        printGraph(adjList);
         System.out.println("\nDFS");
         DFS(adjList, 1);
 

@@ -57,7 +57,6 @@ public class Demo {
                     stack.push(temp);
                 }
             }
-
         }
     }
 
