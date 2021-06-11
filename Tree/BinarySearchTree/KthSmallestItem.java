@@ -39,10 +39,10 @@ public class KthSmallestItem {
             // store sum of all element smaller than current root ;
             item = root.data;
             // decremented k and call right sub-tree
-            k = k -( root.lCount + 1);
-            kSmallestItem(root.right , k );
+            k = k - (root.lCount + 1);
+            kSmallestItem(root.right , k);
         }else // call left sub-tree
-            kSmallestItem(root.left , k );
+            kSmallestItem(root.left , k);
     }
     
     public static void main(String[] args) throws FileNotFoundException{
