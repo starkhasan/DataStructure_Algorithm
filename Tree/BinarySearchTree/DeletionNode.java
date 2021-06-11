@@ -9,7 +9,7 @@ class Node{
         left = right = null;
     }
 }
-public class Demo{
+public class DeletionNode {
     static Node insert(Node root,int data){
         if(root == null)
             return new Node(data);
@@ -33,7 +33,6 @@ public class Demo{
     static Node deletion(Node root,int key){
         if(root == null)
             return root;
-        
         if(key < root.data)
             root.left = deletion(root.left, key);
         else if(key > root.data)
@@ -48,7 +47,6 @@ public class Demo{
                 root.right = deletion(root.right, root.data);
             }
         }
-
         return root;
     }
 
@@ -65,16 +63,14 @@ public class Demo{
         var scanner = new Scanner(file);
         Node root = null;
         var input = "";
-        while(scanner.hasNext())
+        while(scanner.hasNext()){
             input = scanner.nextLine();
-        for (String string : input.split(" ")){
-            root = insert(root,Integer.parseInt(string));
         }
-        System.out.println("\nInorder Traversal of Binary Search Tree : ");
-        inorder(root);
-        System.out.println("\nDelete Node in Binary Search Tree : ");
-        root = deletion(root, 7);
-        inorder(root);
-        scanner.close();
+        for (String string : input.split(" ")) {
+            root = insert(root, Integer.parseInt(string));
+        }
+
+        root = deletion(root, 5);
+        scanner.close();        
     }
 }
