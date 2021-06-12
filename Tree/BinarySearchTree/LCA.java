@@ -15,14 +15,10 @@ public class LCA {
         if(root == null)
             return new Node(data);
         else{
-            Node cur;
-            if(data <= root.data){
-                cur = insert(root.left,data);
-                root.left = cur;
-            }else{
-                cur = insert(root.right,data);
-                root.right = cur;
-            }
+            if(data <= root.data)
+                root.left = insert(root.left,data);
+            else
+                root.right = insert(root.right,data);
             return root;
         }
     }
@@ -37,17 +33,42 @@ public class LCA {
         }
         return root;
     }
-    public static void main(String[] args) throws IOException{
-        BufferedReader buffer = new BufferedReader(new InputStreamReader(System.in));
-        int tree_size = Integer.parseInt(buffer.readLine());
-        Node root = null;
-        while(tree_size > 0){
-            root = insert(root,Integer.parseInt(buffer.readLine()));
-            tree_size -=1;
+
+    static void inorder(Node focusNode){
+        if(focusNode!=null){
+            inorder(focusNode.left);
+            System.out.print(focusNode.data+" ");
+            inorder(focusNode.right);
         }
-        Node temp = lca(root,14,8);
+    }
+
+    public static void main(String[] args) throws FileNotFoundException{
+        var file = new File("Input.txt");
+        var scanner = new Scanner(file);
+        Node root = null;
+        var input = "";
+        var n1 = 0;
+        var n2 = 0;
+        var isFirst = true;
+        var isSecond = true;
+        while(scanner.hasNext()){
+            if(isFirst){
+                input = scanner.nextLine();
+                isFirst = false;
+            }else if(isSecond){
+                isSecond = false;
+                n1 = Integer.parseInt(scanner.nextLine());
+            }else{
+                n2 = Integer.parseInt(scanner.nextLine());
+            }
+        }
+        for (String string : input.split(" ")) {
+            root = insert(root,Integer.parseInt(string));
+        }
+        inorder(root);
+        Node temp = lca(root,n1,n2);
         if(temp!=null)
             System.out.println("LCA Node = "+temp.data);
-        buffer.close();        
+        scanner.close();        
     }
 }
