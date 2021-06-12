@@ -10,10 +10,9 @@ class Node{
         left = right = parent = null;
     }
 }
-class Demo{
-
+public class InorderPredecessor {
     static Node insert(Node root,int data){
-        if(root  == null)
+        if(root == null)
             return new Node(data);
         else{
             if(data <= root.data){
@@ -27,6 +26,43 @@ class Demo{
         }
     }
 
+
+    static Node search(Node root,Node key){
+        if(root == null)
+            return null;
+        if(key.data == root.data)
+            return root;
+        if(key.data < root.data)
+            return search(root.left, key);
+        return search(root.right, key);
+    }
+
+    static Node inorderPredecessor(Node root,Node key){
+        var find = search(root, key);
+        if(find.left!=null)
+            return predecessor(find);
+        else{
+            var temp = find;
+            while(temp.parent!=null){
+                if(temp.parent.data < find.data){
+                    find = temp.parent;
+                    break;
+                }
+                temp = temp.parent;
+            }
+            return find;
+        }
+
+    }
+
+
+    static Node predecessor(Node root){
+        var temp = root;
+        while(temp.left!=null)
+            temp = temp.left;
+        return temp;
+    }
+
     static void inorder(Node focusNode){
         if(focusNode!=null){
             inorder(focusNode.left);
@@ -35,61 +71,27 @@ class Demo{
         }
     }
 
-    static Node search(Node root,Node find){
-        if(root == null)
-            return null;
-        if(root.data == find.data)
-            return root;
-        if(root.data > find.data)
-            return search(root.left,find);
-        return search(root.right, find);
-    }
-
-    static Node inorderSuccessor(Node root,Node key){
-        Node find = search(root, key);
-        if(find.left!=null)
-            find = findSuccessor(find.left);
-        else{
-            Node temp = find;
-            while(temp.parent != null){
-                if(temp.parent.data < find.data){
-                    find = temp.parent;
-                    break;
-                }
-                temp = temp.parent;
-            }
-        }
-        return find;
-    }
-
-    static Node findSuccessor(Node root){
-        Node temp = root;
-        while(temp.right!=null)
-            temp = temp.right;
-        return temp;
-    }
 
     public static void main(String[] args) throws FileNotFoundException{
         var file = new File("Input.txt");
         var scanner = new Scanner(file);
-        var isFirst = true;
         var input = "";
         Node root = null;
         Node key = null;
+        var isFirst = true;
         while(scanner.hasNext()){
             if(isFirst){
                 isFirst = false;
                 input = scanner.nextLine();
-            }else{
+            }else
                 key = new Node(Integer.parseInt(scanner.nextLine()));
-            }
         }
-        for (String string : input.split(" ")){
-            root = insert(root,Integer.parseInt(string));
+
+        for (String string : input.split(" ")) {
+            root = insert(root, Integer.parseInt(string));
         }
-        inorder(root);
-        var result = inorderSuccessor(root,key);
-        System.out.println("\nInorder Successor "+result.data);
-        scanner.close();
+        var temp = inorderPredecessor(root, key);
+        System.out.println("Inorder Predecessor = "+temp.data);
+        scanner.close();    
     }
 }
