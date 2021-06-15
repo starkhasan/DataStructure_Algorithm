@@ -32,15 +32,16 @@ public class RemoveDuplicateSorted{
     }
 
     static Node removeDuplicate(Node head){
+        var prev = head;
         var temp = head;
-        if(head == null)
-            return head;
-        while(temp.next!=null){
-            if(temp.data == temp.next.data)
-                temp.next = temp.next.next;
-            else
-                temp = temp.next;
+        while(temp!=null){
+            if(temp.data != prev.data){
+                prev.next = temp;
+                prev = temp;
+            }
+            temp = temp.next;
         }
+        prev.next = null;
         return head;
     }
     public static void main(String[] args) {
