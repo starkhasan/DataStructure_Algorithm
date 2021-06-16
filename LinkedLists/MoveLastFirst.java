@@ -51,5 +51,6 @@ public class MoveLastFirst{
         printList(head);
         head = moveLastFirst(head);
         printList(head);
+        sc.close();
     }
 }

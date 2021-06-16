@@ -8,7 +8,7 @@ class Node{
         next = null;
     }
 }
-class Demo{
+public class MovOccurrenceLast {
     static Node insert(Node head,int data){
         if(head == null)
             return new Node(data);
@@ -29,49 +29,53 @@ class Demo{
         }
     }
 
-    static Node sort(Node head){
-        var temp = head;
+    static Node moveOccurrence(Node head,int item){
         Node newHead = null;
-        while(temp!=null){
-            if(newHead == null){
-                newHead = new Node(temp.data);
-            }else if(newHead.data >= temp.data){
-                var newNode = new Node(temp.data);
-                newNode.next = newHead;
-                newHead = newNode;
-            }else{
-                var current = newHead;
-                while(current.next != null){
-                    if(current.data < temp.data && current.next.data >= temp.data)
-                        break;
-                    current = current.next;
-                }
-                var tempNode = new Node(temp.data);
-                if(current.next == null)
-                    current.next = tempNode;
-                else{
-                    tempNode.next = current.next;
-                    current.next = tempNode;
-                }    
-            }
-            temp = temp.next;
+        var temp = head;
+        while (temp!=null) {
+            if(temp.data == item)
+                newHead = insert(newHead, temp.data);
+            temp = temp.next; 
         }
-        return newHead;
+        temp = head;
+        Node prev = head;
+        while(temp!=null){
+            if(temp == head && temp.data == item){
+                head = temp.next;
+                temp.next = null;
+                temp = head;
+                prev = head;
+            }else if(temp.data == item){
+                prev.next = temp.next;
+                temp = temp.next;
+            }else{
+                prev = temp;
+                temp = temp.next;
+            }
+        }
+        prev.next = newHead;
+        return head;
     }
-
     public static void main(String[] args) throws FileNotFoundException{
         var file = new File("Input.txt");
         var scanner = new Scanner(file);
         Node head = null;
         var input = "";
-        while(scanner.hasNext())
-            input = scanner.nextLine();
+        var isFirst = true;
+        var item = 0;
+        while(scanner.hasNext()){
+            if(isFirst){
+                isFirst = false;
+                input = scanner.nextLine();
+            }else
+                item = Integer.parseInt(scanner.nextLine());
+        }
         for (String string : input.split(" ")) {
             head = insert(head, Integer.parseInt(string));
         }
         printLinkedList(head);
-        head = sort(head);
         System.out.println();
+        head = moveOccurrence(head,item);
         printLinkedList(head);
         scanner.close();
     }

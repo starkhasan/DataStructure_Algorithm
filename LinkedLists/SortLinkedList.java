@@ -8,7 +8,7 @@ class Node{
         next = null;
     }
 }
-class Demo{
+public class SortLinkedList {
     static Node insert(Node head,int data){
         if(head == null)
             return new Node(data);
@@ -29,7 +29,7 @@ class Demo{
         }
     }
 
-    static Node sort(Node head){
+    static Node sortLinkedList(Node head){
         var temp = head;
         Node newHead = null;
         while(temp!=null){
@@ -70,9 +70,9 @@ class Demo{
             head = insert(head, Integer.parseInt(string));
         }
         printLinkedList(head);
-        head = sort(head);
+        head = sortLinkedList(head);
         System.out.println();
         printLinkedList(head);
         scanner.close();
-    }
+    }    
 }
