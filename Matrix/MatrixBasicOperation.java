@@ -1,6 +1,4 @@
-package Matrix;
 import java.util.*;
-import java.io.*;
 public class MatrixBasicOperation {
     final static Scanner sc = new Scanner(System.in);
     static void insert(int[][] A,int n){
@@ -122,7 +120,7 @@ public class MatrixBasicOperation {
         }
         List<Integer> tempList = duplicateElement(temp);
         if(tempList.size()>0){
-            Iterator iterator = tempList.iterator();
+            var iterator = tempList.iterator();
             while(iterator.hasNext()){
                 System.out.print(iterator.next()+" ");
             }
