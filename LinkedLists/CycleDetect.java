@@ -32,8 +32,8 @@ public class CycleDetect {
 
 
     public static boolean hasCycle(Node head){
-        Node fast = head.next;
-        Node slow = head;
+        Node fast = head.next.next;
+        Node slow = head.next;
         while(slow!=null && fast!=null && fast.next!=null){
             if(slow == fast)
                 return true;

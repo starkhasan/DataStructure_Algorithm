@@ -8,7 +8,7 @@ class Node{
         next = null;
     }
 }
-class Demo{
+public class InsertCircularList {
     static Node insert(Node head,int data){
         if(head == null)
             return new Node(data);
@@ -37,35 +37,41 @@ class Demo{
         return head;
     }
 
-    static boolean hasCycle(Node head){
-        var slow = head.next;
-        var fast = head.next.next;
-        while(slow != null && fast!= null && fast.next!= null){
-            if(slow == fast)
-                return true;    
-            fast = fast.next.next;
-            slow = slow.next;
-        }
-        return false;
-    }
+    static Node insertInCircular(Node head,int item){
+        var first = head;
+        var temp = head.next;
+        while(temp.next != first)
+            temp = temp.next;
+
+        var newNode = new Node(item);
+        newNode.next = head;
+        temp.next = newNode;
+        return head;
+    } 
+
 
     public static void main(String[] args) throws FileNotFoundException{
         var file = new File("Input.txt");
         var scanner = new Scanner(file);
         var input = "";
         Node head = null;
-        while(scanner.hasNext())
-            input = scanner.nextLine();
+        var isFirst = true;
+        var item = 0;
+        while(scanner.hasNext()){
+            if(isFirst){
+                isFirst = false;
+                input = scanner.nextLine();
+            }else
+                item = Integer.parseInt(scanner.nextLine());
+        }
         for (String string : input.split(" ")){
             head = insert(head,Integer.parseInt(string));
-        }       
+        }
+
         printLinkedList(head);
         head = makeCycle(head);
-        var result = hasCycle(head);
-        if(result)
-            System.out.println("Yes Loop is Present");
-        else
-            System.out.println("No! Loop not present");
+        head = insertInCircular(head, item);
+        printLinkedList(head);
         scanner.close();
     }
 }

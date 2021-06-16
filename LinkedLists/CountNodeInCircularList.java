@@ -8,7 +8,7 @@ class Node{
         next = null;
     }
 }
-class Demo{
+public class CountNodeInCircularList {
     static Node insert(Node head,int data){
         if(head == null)
             return new Node(data);
@@ -37,18 +37,17 @@ class Demo{
         return head;
     }
 
-    static boolean hasCycle(Node head){
-        var slow = head.next;
-        var fast = head.next.next;
-        while(slow != null && fast!= null && fast.next!= null){
-            if(slow == fast)
-                return true;    
-            fast = fast.next.next;
-            slow = slow.next;
-        }
-        return false;
-    }
 
+    static int countNodes(Node head){
+        var nodeCount = 1;
+        var temp = head.next;
+        var first = head;
+        while(temp!=first){
+            nodeCount+=1;
+            temp = temp.next;
+        }
+        return nodeCount;
+    }
     public static void main(String[] args) throws FileNotFoundException{
         var file = new File("Input.txt");
         var scanner = new Scanner(file);
@@ -61,11 +60,8 @@ class Demo{
         }       
         printLinkedList(head);
         head = makeCycle(head);
-        var result = hasCycle(head);
-        if(result)
-            System.out.println("Yes Loop is Present");
-        else
-            System.out.println("No! Loop not present");
+        var result = countNodes(head);
+        System.out.println("Total Node Count = "+result);
         scanner.close();
     }
 }
