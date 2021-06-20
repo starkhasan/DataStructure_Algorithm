@@ -12,7 +12,6 @@ public class ElementOccrenceFirst {
                 countMap.put(ar[i], 1);
                 posMap.put(ar[i], i);
             }else{
-
                 count = countMap.get(ar[i]) + 1;
                 countMap.put(ar[i], count);
                 if(count == key && pos > posMap.get(ar[i])){
