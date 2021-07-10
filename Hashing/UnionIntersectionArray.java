@@ -1,18 +1,27 @@
 import java.util.*;
 import java.io.*;
-public class SubsetArray {
-    static boolean isSubSet(int[] ar1,int[] ar2){
-        var hashSet = new HashSet<Integer>();
+public class UnionIntersectionArray {
+    static void intersection(int[] ar1,int[] ar2){
+        var hashMap = new HashMap<Integer,Integer>();
         for (int i = 0; i < ar1.length; i++) {
-            if(!hashSet.contains(ar1[i]))
-                hashSet.add(ar1[i]);
+            if(!hashMap.containsKey(ar1[i]))
+                hashMap.put(ar1[i], 1);
         }
+        System.out.println("Intersection ");
         for (int i = 0; i < ar2.length; i++) {
-            if(!hashSet.contains(ar2[i]))
-                return false;
+            if(hashMap.containsKey(ar2[i]))
+                System.out.print(ar2[i]+" ");
+            else
+                hashMap.put(ar2[i], 1);
         }
-        return true;
+
+        System.out.println("\nUnion ");
+        var keys = hashMap.keySet();
+        for (var integer : keys) {
+            System.out.print(integer+" ");
+        }
     }
+
     public static void main(String[] args) throws FileNotFoundException{
         var file = new File("Input.txt");
         var scanner = new Scanner(file);
@@ -38,10 +47,7 @@ public class SubsetArray {
         for (int i = 0; i < secondAr.length; i++) {
             secondAr[i] = Integer.parseInt(strAr[i]);
         }
-        if(isSubSet(firstAr,secondAr))
-            System.out.println("Yes! arr2[] is subset of arr1[] ");
-        else
-            System.out.println("No! arr2[] is not subset of arr1[] ");
-        scanner.close();
-    }   
+        intersection(firstAr,secondAr);
+        scanner.close();        
+    }
 }
