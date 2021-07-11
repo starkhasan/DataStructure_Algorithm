@@ -1,3 +1,8 @@
+/**
+ * First element occurring k times in an array
+ * Given an array of n integers. The task is to find the first element that occurs k number of times. 
+ * If no element occurs k times the print -1. The distribution of integer elements could be in any range.
+ */
 import java.util.*;
 import java.io.*;
 public class ElementOccrenceFirst {
