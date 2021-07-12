@@ -1,15 +1,19 @@
 import java.util.*;
 import java.io.*;
-public class PairProduct {
-    static boolean pairProduct(int[] ar,int k){
+public class PairSumMaxDistance {
+    static void pairSumMaxDistance(int[] ar,int k){
         var hashMap = new HashMap<Integer,Integer>();
+        var maxDistance = Integer.MIN_VALUE;
         for (int i = 0; i < ar.length; i++) {
-            if(hashMap.containsKey(k/ar[i])){
-                return true;
-            }else
-                hashMap.put(ar[i], i);
+            if(hashMap.containsKey(k-ar[i])){
+                var tempDistance = Math.max(hashMap.get(k-ar[i]),i+1);
+                if(maxDistance < tempDistance)
+                    maxDistance = tempDistance;
+            }else{
+                hashMap.put(ar[i], i+1);
+            }
         }
-        return false;
+        System.out.println(maxDistance);
     }
     public static void main(String[] args) throws FileNotFoundException{
         var file = new File("Input.txt");
@@ -29,8 +33,7 @@ public class PairProduct {
         for (int i = 0; i < ar.length; i++) {
             ar[i] = Integer.parseInt(input[i]);
         }
-        var result = pairProduct(ar,k);
-        System.out.println(result);
+        pairSumMaxDistance(ar,k);
         scanner.close();
     }
 }
