@@ -1,6 +1,9 @@
+/**
+ * Return maximum occurring character in an input string
+ */
 import java.util.*;
 import java.io.*;
-class Demo{
+public class RepeatedCharacter {
     static char maximumCharacter(String input){
         var count = Integer.MIN_VALUE;
         var chr = Character.MIN_VALUE;
