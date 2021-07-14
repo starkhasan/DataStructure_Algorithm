@@ -1,15 +1,15 @@
 import java.util.*;
 import java.io.*;
-class Demo{
-    static int consonent(String input,String vowels){
+public class CountConsonent {
+    static int countConsonent(String input,String vowels){
         if(input.isEmpty())
             return 0;
         else{
             var chr = input.substring(input.length()-1);
             if(!vowels.contains(chr))
-                return 1+consonent(input.substring(0,input.length()-1), vowels);
+                return 1+countConsonent(input.substring(0,input.length()-1), vowels);
             else
-                return consonent(input.substring(0,input.length()-1), vowels);
+                return countConsonent(input.substring(0,input.length()-1), vowels);
         }
     }
     public static void main(String[] args) throws FileNotFoundException{
@@ -17,8 +17,8 @@ class Demo{
         var scanner = new Scanner(file);
         var input = scanner.nextLine();
         var vowels = "aeiou";
-        var result = consonent(input,vowels);
-        System.out.println(result);
+        var result = countConsonent(input,vowels);
+        System.out.println("Number of Consonent = "+result);
         scanner.close();
     }
 }
