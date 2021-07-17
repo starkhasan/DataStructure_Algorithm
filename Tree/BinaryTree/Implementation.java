@@ -1,6 +1,5 @@
+import java.util.*;
 import java.io.*;
-import java.util.LinkedList;
-import java.util.Queue;
 class Node{
     Node left;
     Node right;
@@ -10,86 +9,93 @@ class Node{
         left = right = null;
     }
 }
-public class Implementation {
-    static int getHeight(Node root){
-        if(root == null)
-            return -1;
-        else
-            return Math.max(getHeight(root.left)+1,getHeight(root.right)+1);
-    }
-
-    static Node insert(Node root,int data){
-        if(root == null){
-            return new Node(data);
+class Implementation{
+    static Node root;
+    static void insert(Node current,int data){
+        if(current == null){
+            current = new Node(data);
+            return;
         }else{
-            Node current = root;
             Queue<Node> queue = new LinkedList<Node>();
-            queue.add(root);
+            queue.add(current);
             while(!queue.isEmpty()){
-                Node temp = queue.peek();
+                current = queue.peek();
                 queue.remove();
-                if(temp.left == null){
+                if(current.left == null){
                     current.left = new Node(data);
                     break;
                 }else{
-                    if(temp.right != null)
-                        current = current.left;
-                    queue.add(temp.left);
+                    queue.add(current.left);
                 }
 
-                if(temp.right == null){
+                if(current.right == null){
                     current.right = new Node(data);
                     break;
                 }else{
-                    queue.add(temp.right);
+                    queue.add(current.right);
                 }
             }
-            return root;
         }
     }
 
 
-    static void inorder(Node temp){
-        if(temp!=null){
-            inorder(temp.left);
-            System.out.print(temp.data+" ");
-            inorder(temp.right);
+    // static void insert(Node temp, int key)
+    // {
+ 
+    //     if (temp == null) {
+    //         root = new Node(key);
+    //         return;
+    //     }
+    //     Queue<Node> q = new LinkedList<Node>();
+    //     q.add(temp);
+ 
+    //     // Do level order traversal until we find
+    //     // an empty place.
+    //     while (!q.isEmpty()) {
+    //         temp = q.peek();
+    //         q.remove();
+ 
+    //         if (temp.left == null) {
+    //             temp.left = new Node(key);
+    //             break;
+    //         }
+    //         else
+    //             q.add(temp.left);
+ 
+    //         if (temp.right == null) {
+    //             temp.right = new Node(key);
+    //             break;
+    //         }
+    //         else
+    //             q.add(temp.right);
+    //     }
+    // }
+
+    static void inorder(Node root){
+        if(root!=null){
+            inorder(root.left);
+            System.out.print(root.data+" ");
+            inorder(root.right);
         }
     }
 
-    static void preorder(Node temp){
-        if(temp!=null){
-            System.out.print(temp.data+" ");
-            preorder(temp.left);
-            preorder(temp.right);
-        }
-    }
 
-    static void postorder(Node temp){
-        if(temp!=null){
-            postorder(temp.left);
-            postorder(temp.right);
-            System.out.print(temp.data+" ");
-        }
-    }
-
-    public static void main(String[] args) throws IOException{
-        BufferedReader buffer = new BufferedReader(new InputStreamReader(System.in));
-        Node root = null;
-        int tree_size = Integer.parseInt(buffer.readLine());
-        while(tree_size > 0){
-            root = insert(root,Integer.parseInt(buffer.readLine()));
-            tree_size-=1;
-        }
-        System.out.println("\nInorder Traversal");
+    public static void main(String[] args) throws FileNotFoundException{
+        var file = new File("Input.txt");
+        var scanner = new Scanner(file);
+        root = new Node(10);
+        root.left = new Node(11);
+        root.left.left = new Node(7);
+        root.right = new Node(9);
+        root.right.left = new Node(15);
+        root.right.right = new Node(8);
+        
+        System.out.println("Inorder Before Insertion : ");
         inorder(root);
-        System.out.println("\nPreorder Traversal");
-        preorder(root);
-        System.out.println("\nPostorder Traversal");
-        postorder(root);
-        System.out.print("\nHeight of Tree : ");
-        int height = getHeight(root);
-        System.out.print(height);
-        buffer.close();
+
+        insert(root,12);
+        System.out.println("\nInorder After Insertion : ");
+        inorder(root);
+        scanner.close();
     }
 }
