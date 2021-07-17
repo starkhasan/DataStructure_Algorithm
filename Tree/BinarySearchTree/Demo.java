@@ -10,7 +10,6 @@ class Node{
     }
 }
 class Demo{
-    static int count = 0;
     static Node insert(Node root,int data){
         if(root == null)
             return new Node(data);
@@ -23,36 +22,65 @@ class Demo{
         }
     }
 
-    static void inorder(Node root,int n){
-        if(root!=null ){
-            inorder(root.left,n);
-            count+=1;
-            if(count == n){
-                System.out.println(root.data);
-                return;
-            }
-            inorder(root.right,count);
+    static int leadNode(Node root){
+        if(root == null)
+            return 0;
+        else{
+            var count = 0;
+            if(root.left == null && root.right == null)
+                count+=1;
+            count+=leadNode(root.left);
+            count+=leadNode(root.right);
+            return count;
         }
     }
 
-
-    static int countNode(Node focusNode){
-        if(focusNode == null)
+    static int singleChildNode(Node root){
+        if(root == null)
             return 0;
-        else
-            return 1+countNode(focusNode.left)+countNode(focusNode.right);
+        else{
+            var count = 0;
+            if(root.left != null || root.right!=null){
+                System.out.print(root.data+" ");
+                count+=1;
+            }
+            count+=singleChildNode(root.left);
+            count+=singleChildNode(root.right);
+            return count;
+        }
+    }
+
+    static Node removeLeadNode(Node root){
+        if(root == null)
+            return null;
+        if(root.left == null && root.right == null)
+            return null;
+        root.left = removeLeadNode(root.left);
+        root.right =removeLeadNode(root.right);
+        return root;
+    }
+
+    static int countNode(Node root){
+        if(root == null)
+            return 0;
+        else{
+            return countNode(root.left)+countNode(root.right)+1;
+        }
     }
 
     public static void main(String[] args) throws FileNotFoundException{
         var file = new File("Input.txt");
         var scanner = new Scanner(file);
         var input = scanner.nextLine().split(" ");
-        Node root =null;
+        Node root = null;
         for (String string : input) {
             root = insert(root,Integer.parseInt(string));
         }
-        inorder(root, 4);
-        System.out.println("\nCount Nodes = "+countNode(root));
+        System.out.println(leadNode(root));
+        System.out.println("Count total Node = "+countNode(root));
+        root = removeLeadNode(root);
+        System.out.println("Count total Node = "+countNode(root));
+        System.out.println("Single Child Node = "+singleChildNode(root));
         scanner.close();
     }
 }
