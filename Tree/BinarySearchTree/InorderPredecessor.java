@@ -40,7 +40,7 @@ public class InorderPredecessor {
     static Node inorderPredecessor(Node root,Node key){
         var find = search(root, key);
         if(find.left!=null)
-            return predecessor(find);
+            return predecessor(find.left);
         else{
             var temp = find;
             while(temp.parent!=null){
@@ -58,8 +58,8 @@ public class InorderPredecessor {
 
     static Node predecessor(Node root){
         var temp = root;
-        while(temp.left!=null)
-            temp = temp.left;
+        while(temp.right!=null)
+            temp = temp.right;
         return temp;
     }
 

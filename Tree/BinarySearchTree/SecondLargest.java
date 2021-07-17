@@ -34,7 +34,6 @@ public class SecondLargest {
                     current = current.right;
                 }
                 Node temp = stack.pop();
-                
                 if(count == 0){
                     System.out.print(temp.data+" ");
                     break;
@@ -45,18 +44,32 @@ public class SecondLargest {
         }
     }
 
-    public static void main(String[] args) throws IOException{
-        BufferedReader buffer = new BufferedReader(new FileReader("Input.txt"));
-        String input = "";
+    static int maxNode(Node focusNode){
+        if(focusNode.right == null)
+            return focusNode.data;
+        else
+            return maxNode(focusNode.right);
+    }
+
+    static int secondMaxNode(Node focusNode,int max){
+        if(focusNode.right.data == max)
+            return focusNode.data;
+        else
+            return secondMaxNode(focusNode.right, max);
+    }
+
+    public static void main(String[] args) throws FileNotFoundException{
+        var file = new File("Input.txt");
+        var scanner = new Scanner(file);
+        var input = scanner.nextLine().split(" ");
         Node root = null;
-        while(buffer.readLine()!= null){
-            input = buffer.readLine();
-        }
-        String[] strAr = input.split(" ");
-        for (String string : strAr) {
+        for (String string : input) {
             root = insert(root,Integer.parseInt(string));
         }
         inorder(root);
-        buffer.close();
+        var max = maxNode(root);
+        var result = secondMaxNode(root, max);
+        System.out.println("\nSecond Max Node = "+result);
+        scanner.close();
     }
 }

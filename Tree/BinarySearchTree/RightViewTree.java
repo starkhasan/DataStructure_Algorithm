@@ -56,12 +56,12 @@ public class RightViewTree {
         }
     }
     public void RightView(Node focusNode){
-        ArrayList<Integer> firstElement;
+        ArrayList<Integer> lastElement = new ArrayList<Integer>();
         int level = treeHeight(focusNode);
         for(int i=1;i<=level;i++){
-            firstElement = new ArrayList<Integer>();
-            printLevel(focusNode,i,firstElement);
-            System.out.print(firstElement.get(firstElement.size()-1)+" ");
+            lastElement.clear();
+            printLevel(focusNode,i,lastElement);
+            System.out.print(lastElement.get(lastElement.size()-1)+" ");
         }
     }
     public static void main(String[] args) throws IOException{

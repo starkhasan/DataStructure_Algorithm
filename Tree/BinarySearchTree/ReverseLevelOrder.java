@@ -9,8 +9,8 @@ class Node{
         left = right = null;
     }
 }
-class Demo{
-    static int count = 0;
+public class ReverseLevelOrder{
+
     static Node insert(Node root,int data){
         if(root == null)
             return new Node(data);
@@ -23,36 +23,41 @@ class Demo{
         }
     }
 
-    static void inorder(Node root,int n){
-        if(root!=null ){
-            inorder(root.left,n);
-            count+=1;
-            if(count == n){
-                System.out.println(root.data);
-                return;
-            }
-            inorder(root.right,count);
+    static int height(Node root){
+        if(root == null)
+            return -1;
+        else
+            return Math.max(height(root.left)+1,height(root.right)+1);
+    }
+
+    static void bfs(Node root){
+        var treeHeight = height(root);
+        for (int i = treeHeight; i >= 0; i--) {
+            levelPrint(root,i);
         }
     }
 
-
-    static int countNode(Node focusNode){
-        if(focusNode == null)
-            return 0;
-        else
-            return 1+countNode(focusNode.left)+countNode(focusNode.right);
+    static void levelPrint(Node focusNode,int level){
+        if(focusNode!=null){
+            if(level == 0)
+                System.out.print(focusNode.data+" ");
+            else{
+                levelPrint(focusNode.left, level-1);
+                levelPrint(focusNode.right, level-1);
+            }
+        }
     }
 
     public static void main(String[] args) throws FileNotFoundException{
         var file = new File("Input.txt");
         var scanner = new Scanner(file);
+        Node root = null;
         var input = scanner.nextLine().split(" ");
-        Node root =null;
         for (String string : input) {
             root = insert(root,Integer.parseInt(string));
         }
-        inorder(root, 4);
-        System.out.println("\nCount Nodes = "+countNode(root));
+        System.out.println("\nReverse Level Order Traversal : ");
+        bfs(root);
         scanner.close();
     }
 }

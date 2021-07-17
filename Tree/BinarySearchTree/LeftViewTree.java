@@ -56,10 +56,10 @@ public class LeftViewTree {
         }
     }
     public void LeftView(Node focusNode){
-        ArrayList<Integer> firstElement;
+        ArrayList<Integer> firstElement = new ArrayList<Integer>();
         int level = treeHeight(focusNode);
         for(int i=1;i<=level;i++){
-            firstElement = new ArrayList<Integer>();
+            firstElement.clear();
             printLevel(focusNode,i,firstElement);
             System.out.print(firstElement.get(0)+" ");
         }
