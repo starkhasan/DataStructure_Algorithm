@@ -1,6 +1,6 @@
-import java.io.*;
 import java.util.*;
-public class Demo{
+import java.io.*;
+public class Divisibility {
     //Divisible by 2
     static boolean isDivisibleTwo(String input,int k){
         int digit = Integer.parseInt(input.substring(input.length()-1));
