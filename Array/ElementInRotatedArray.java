@@ -1,6 +1,6 @@
 import java.util.*;
 import java.io.*;
-class Demo{
+public class ElementInRotatedArray {
     static void rightRotation(int[] ar,int start,int end){
         var item = ar[end];
         for (int i = end; i > start; i--) {
